@@ -1,0 +1,18 @@
+/* Diseñador v2 | editorial editable starter tokens | verify contrast against actual UI */
+:root {
+  --font-display: "Georgia", serif;
+  --color-surface: #f5f1e7;
+  --color-text: #23221e;
+  --color-action: #995b43;
+  --radius-card: 0px;
+  --shadow-card: 0 1px 0 #999187;
+  --container-max: 1160px;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px;
+  --space-4: 16px; --space-6: 24px; --space-8: 32px;
+  --duration-fast: 140ms; --duration-base: 260ms;
+  --ease-brand: cubic-bezier(.22,1,.36,1);
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --duration-fast: 0ms; --duration-base: 0ms; }
+  *,*::before,*::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

@@ -1,0 +1,38 @@
+{
+  "project": "Ejemplo de briefing de landing",
+  "intent": "Clientes solicitan presupuesto",
+  "visual": {
+    "base": "futuristic",
+    "accent": "editorial",
+    "signature": "Objeto 3D mate con movimiento por puntero, sin tapar CTA"
+  },
+  "tokens": {
+    "brandColor": "#9fe6b8",
+    "background": "#0a0d13",
+    "radius": "4px",
+    "motion": "subtle"
+  },
+  "siteSections": [
+    "Hero",
+    "Servicios",
+    "Prueba real",
+    "Proceso",
+    "Contacto"
+  ],
+  "technical": {
+    "stack": "mantener actual",
+    "3d": "lazy-load + fallback estático",
+    "motion": "GSAP sólo donde aporte",
+    "accessibility": "WCAG 2.2 AA como objetivo"
+  },
+  "testPlan": [
+    "320-1440 responsive",
+    "teclado",
+    "reduced motion",
+    "sin WebGL",
+    "CTA",
+    "build",
+    "browser errors"
+  ],
+  "status": "Ejemplo de especificación, no una auditoría real"
+}

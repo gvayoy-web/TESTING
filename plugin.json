@@ -1,0 +1,87 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "disenador",
+  "version": "4.0.0",
+  "description": "Diseñador v4: estudio creativo multidisciplinario con metodología Impeccable, dirección artística, scroll cinematográfico por capas, visual mind y QA.",
+  "author": {
+    "name": "Isaac"
+  },
+  "keywords": [
+    "3d-modeling",
+    "3d-rendering",
+    "autopilot",
+    "blender",
+    "brand-identity",
+    "cinematic-ui",
+    "claymorphism",
+    "conversion",
+    "creative-development",
+    "creative-production",
+    "design-studio",
+    "design-systems",
+    "file-preflight",
+    "frontend",
+    "graphic-design",
+    "gsap",
+    "illustration",
+    "impeccable",
+    "infographics",
+    "layered-scroll",
+    "lean-mode",
+    "lighthouse",
+    "logo",
+    "magic-ui",
+    "mask-transitions",
+    "motion",
+    "motion-design",
+    "motion-graphics",
+    "multidisciplinary",
+    "one-prompt",
+    "packaging",
+    "playwright",
+    "prepress",
+    "print",
+    "react-bits",
+    "react-three-fiber",
+    "responsive",
+    "scrollytelling",
+    "seo",
+    "shaders",
+    "social-design",
+    "storyboard",
+    "style-recognition",
+    "svg",
+    "threejs",
+    "token-efficiency",
+    "typography",
+    "ui",
+    "ui-library",
+    "ux",
+    "vector",
+    "visual-critique",
+    "visual-regression",
+    "web-design",
+    "webgl"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Diseñador",
+        "shortDescription": "Diseño premium y motion",
+        "longDescription": "Diseñador v4 aplica dirección artística basada en principios de Impeccable y coreografía de scroll por capas, con ejemplos funcionales, storyboards, máscaras, crítica visual y pruebas responsive. Conserva diseño gráfico, branding, vector, 3D, web, motion, Visual Mind y Lean Mind. Las bibliotecas externas solo se utilizan si están instaladas.",
+        "developerName": "Isaac",
+        "category": "Productivity",
+        "capabilities": [
+          "Interactive"
+        ],
+        "defaultPrompt": [
+          "Diseña una web única usando claymorphism, Three.js y GSAP, sin sacrificar accesibilidad ni rendimiento.",
+          "Audita este frontend, mejora jerarquía, tipografía, animaciones y responsividad y entrega los cambios listos para producción.",
+          "Propón tres direcciones visuales radicalmente distintas para mi sitio y construye la mejor."
+        ],
+        "logo": "./assets/icon.svg",
+        "composerIcon": "./assets/icon.svg"
+      }
+    }
+  }
+}

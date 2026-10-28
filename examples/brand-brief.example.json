@@ -1,0 +1,17 @@
+{
+  "brand": "Estudio Norte",
+  "tagline": "Ideas con dirección",
+  "monogram": "EN",
+  "concept": "Una identidad editorial sobria y cálida",
+  "colors": {
+    "ink": "#152532",
+    "background": "#F5EFE4",
+    "accent": "#EA8454",
+    "secondary": "#77A59A"
+  },
+  "fonts": {
+    "display": "sans-serif",
+    "body": "sans-serif"
+  },
+  "format": "svg"
+}

@@ -1,0 +1,9 @@
+[
+  "test_layered_scroll.py::test_chapters_mobile_and_desktop[1024-768]",
+  "test_layered_scroll.py::test_chapters_mobile_and_desktop[1440-900]",
+  "test_layered_scroll.py::test_chapters_mobile_and_desktop[320-700]",
+  "test_layered_scroll.py::test_chapters_mobile_and_desktop[375-812]",
+  "test_layered_scroll.py::test_chapters_mobile_and_desktop[768-900]",
+  "test_layered_scroll.py::test_layer_progress_bidirectional",
+  "test_layered_scroll.py::test_reduced_motion_and_keyboard"
+]

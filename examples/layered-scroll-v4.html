@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10130f">
+<meta name="description" content="Experimento offline de transiciones cinematográficas por capas controladas con scroll.">
+<title>DISEÑADOR V4 — Capas en movimiento</title>
+<style>
+:root{color-scheme:dark;--ink:#eae7dc;--dark:#10130f;--accent:#ffc081;--font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box} html{scroll-behavior:smooth}body{margin:0;background:var(--dark);color:var(--ink);font-family:var(--font);overflow-x:clip} ::selection{background:var(--accent);color:#121410}a{color:inherit}a:focus-visible{outline:3px solid #ffb565;outline-offset:5px}
+.skip{position:absolute;left:1rem;top:-5rem;z-index:1000;background:#ffb565;color:#10130f;padding:.75rem}.skip:focus{top:1rem}
+header{position:absolute;z-index:8;top:0;width:100%;display:flex;align-items:center;justify-content:space-between;padding:clamp(1rem,3vw,2.5rem);pointer-events:none}.wordmark{font-weight:900;letter-spacing:-.05em;font-size:1.06rem}.wordmark span{color:var(--accent)}header>*{pointer-events:auto}header nav{display:flex;gap:clamp(.8rem,2vw,2rem);font-size:.73rem;letter-spacing:.15em;text-transform:uppercase}header nav a{text-decoration:none;border-bottom:1px solid transparent;padding-bottom:.2rem}header nav a:hover{border-color:currentColor}
+.intro{min-height:100svh;display:grid;place-content:center;position:relative;padding:6rem clamp(1.5rem,8vw,11rem) 5rem;overflow:hidden;background:#10130f}.intro:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 37% 42% at 78% 38%,#a3632b4d,transparent 74%),linear-gradient(90deg,transparent 98%,#ffffff0a 100%);background-size:auto,70px 100%;pointer-events:none}.intro>*{position:relative}.eyebrow{font:600 .7rem/1.3 var(--font);letter-spacing:.24em;text-transform:uppercase;color:#f0bb8e}.intro h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(4rem,11vw,10.8rem);line-height:.91;letter-spacing:-.087em;max-width:12ch;margin:1.25rem 0}.intro h1 em{font-style:italic;color:#f5a764;font-weight:400}.intro .dek{font-size:clamp(1rem,1.3vw,1.2rem);line-height:1.65;max-width:47ch;color:#d2d0c6}.intro .hint{font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;margin-top:2.7rem;display:flex;align-items:center;gap:.8rem}.intro .hint:before{content:"";display:block;width:2rem;height:1px;background:var(--accent)}
+.chapter{height:265svh;position:relative;--accent-color:#e7a773}.stage{height:100svh;position:sticky;top:0;isolation:isolate;overflow:hidden;background:var(--dark)}.plane{position:absolute;pointer-events:none;inset:-5%;transform-origin:center center;will-change:transform}.scene-wash{z-index:0;background:radial-gradient(circle at 72% 44%,#c78354 0%,#50352c 29%,#111b1c 62%,#0c1518 100%)}.chapter-blue .scene-wash{background:radial-gradient(ellipse at 27% 48%,#539ca5 0%,#224d66 32%,#101d32 64%,#09111c 100%)}.chapter-gold .scene-wash{background:radial-gradient(circle at 60% 55%,#c9954d 0%,#785c37 22%,#332d26 50%,#121813 78%,#10130f 100%)}
+.atmosphere{z-index:1;opacity:.4;background:repeating-linear-gradient(0deg,transparent 0,transparent 89px,#ffffff17 90px),repeating-linear-gradient(90deg,transparent 0,transparent 89px,#ffffff0c 90px);mask-image:linear-gradient(to bottom,transparent,#000 20%,#000 80%,transparent)}
+.halo{z-index:2;inset:auto;top:49%;left:61%;height:min(68vw,67vh);width:min(68vw,67vh);border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 33% 27%,#ffddb4 0%,#eeab6e 24%,#9b573a 60%,#2d201f 92%);box-shadow:inset -1.1rem -2rem 3.5rem #11090777,1.8rem 3rem 7rem #080c0b77;opacity:.9}.chapter-blue .halo{background:radial-gradient(circle at 32% 27%,#e1ffff 0%,#8bd1c7 26%,#35709e 60%,#132648 96%)}.chapter-gold .halo{background:radial-gradient(circle at 32% 27%,#ffe6b1 0%,#e1b475 27%,#997047 66%,#3e3527 96%)}
+.ring{z-index:3;inset:auto;top:47%;left:61%;height:min(88vw,84vh);width:min(88vw,84vh);border-radius:50%;border:1px solid #ffffff70;box-shadow:0 0 0 1px #ffffff1a inset;transform:translate(-50%,-50%) rotate(-13deg);opacity:.5}.ring:before,.ring:after{content:"";position:absolute;border:1px solid #ffffff47;border-radius:50%;inset:9%}.ring:after{inset:21%;border-color:#ffffff31}
+.scene-copy{z-index:4;position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(1.75rem,9vw,11rem);pointer-events:none}.scene-copy>*{max-width:100%;pointer-events:auto}.scene-n{font-size:.75rem;letter-spacing:.21em;text-transform:uppercase;opacity:.85}.scene-title{max-width:9ch!important;font-family:Georgia,"Times New Roman",serif;font-size:clamp(3.2rem,9vw,9.5rem);letter-spacing:-.075em;line-height:.92;font-weight:400;margin:1.25rem 0;overflow-wrap:normal}.scene-title em{font-style:italic;font-weight:400}.scene-desc{font-size:clamp(.95rem,1.25vw,1.12rem);line-height:1.65;max-width:39ch!important;color:#f4f0e5}.scene-cta{text-decoration:none;display:inline-flex;align-items:center;gap:1rem;border:1px solid #ffffff90;padding:.9rem 1.1rem;margin-top:1.5rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;background:#12151c45;backdrop-filter:blur(7px)}.scene-cta:hover{background:#fff;color:#17191a}
+.corner-note{position:absolute;z-index:6;right:3rem;bottom:3rem;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;opacity:.75}.progress-line{position:absolute;z-index:7;bottom:0;left:0;height:3px;background:#ffe4b5;transform-origin:left;width:100%;transform:scaleX(0);pointer-events:none}.chapter-blue .progress-line{background:#a1d8e5}.chapter-gold .progress-line{background:#ecc489}
+.outro{min-height:75svh;padding:6rem clamp(1.5rem,8vw,10rem);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;background:#e8e4d8;color:#10130f}.outro strong{font-family:Georgia,serif;font-size:clamp(3rem,9vw,9rem);line-height:.97;letter-spacing:-.075em;font-weight:400;max-width:14ch}.outro p{font-size:1.02rem;max-width:55ch;line-height:1.6}.outro a{margin-top:1rem;font-weight:700;text-underline-offset:.3em}
+@media(max-width:700px){header{position:absolute;flex-wrap:wrap;gap:1rem}header nav{width:100%;justify-content:space-between;gap:.55rem;font-size:.62rem}.chapter{height:185svh}.scene-copy{justify-content:flex-end;padding:2rem 1.35rem 11svh}.scene-title{font-size:clamp(2.8rem,16vw,5.5rem);margin:.65rem 0}.scene-desc{font-size:.98rem;max-width:30ch!important}.halo{left:56%;top:36%;height:64vw;width:64vw}.ring{left:56%;top:36%;height:88vw;width:88vw}.corner-note{right:1.35rem;bottom:1.2rem;font-size:.57rem}.intro{padding:6rem 1.5rem}.intro h1{font-size:clamp(3.7rem,15vw,6rem)}.scene-cta{margin-top:.9rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chapter{height:auto;min-height:100svh}.stage{position:relative;min-height:100svh;height:auto}.plane{will-change:auto!important;transform:none!important}.halo{transform:translate(-50%,-50%)!important}.ring{transform:translate(-50%,-50%)!important}.scene-copy{position:relative;min-height:100svh}.progress-line{display:none}.scene-wash{inset:0}}
+</style>
+</head>
+<body>
+<a class="skip" href="#principal">Saltar al contenido</a>
+<header><div class="wordmark">DISEÑADOR<span>®</span> / V4</div><nav aria-label="Capítulos"><a href="#materia">Materia</a><a href="#profundidad">Profundidad</a><a href="#ritmo">Ritmo</a></nav></header>
+<main id="principal">
+<section class="intro" aria-labelledby="opening-title"><p class="eyebrow">01 / Estudio de movimiento</p><h1 id="opening-title">El scroll<br>es <em>espacio.</em></h1><p class="dek">Una experiencia donde el fondo, el sujeto y las palabras avanzan a velocidades distintas. Tres capítulos. Una sola historia. Sin librerías ni conexión a Internet.</p><div class="hint">Desplázate para explorar</div></section>
+<section class="chapter chapter-copper" id="materia" data-scene="1" aria-labelledby="m-title">
+<div class="stage"><div class="plane scene-wash" aria-hidden="true"></div><div class="plane atmosphere" aria-hidden="true"></div><div class="plane halo" aria-hidden="true"></div><div class="plane ring" aria-hidden="true"></div><div class="scene-copy"><span class="scene-n">01 / Sustancia</span><h2 class="scene-title" id="m-title">La <em>materia</em> cobra forma.</h2><p class="scene-desc">Primero existe el material. Después aparece la intención. Cada plano conserva su propia distancia.</p><a class="scene-cta" href="#profundidad">Siguiente capítulo <span aria-hidden="true">↘</span></a></div><span class="corner-note" aria-hidden="true">[ 01 — 03 ]</span><div class="progress-line" aria-hidden="true"></div></div>
+</section>
+<section class="chapter chapter-blue" id="profundidad" data-scene="2" aria-labelledby="p-title">
+<div class="stage"><div class="plane scene-wash" aria-hidden="true"></div><div class="plane atmosphere" aria-hidden="true"></div><div class="plane halo" aria-hidden="true"></div><div class="plane ring" aria-hidden="true"></div><div class="scene-copy"><span class="scene-n">02 / Distancia</span><h2 class="scene-title" id="p-title">Una nueva <em>profundidad.</em></h2><p class="scene-desc">La composición deja de ser plana. La cámara imaginaria cambia, pero el texto nunca pierde su lugar.</p><a class="scene-cta" href="#ritmo">Último capítulo <span aria-hidden="true">↘</span></a></div><span class="corner-note" aria-hidden="true">[ 02 — 03 ]</span><div class="progress-line" aria-hidden="true"></div></div>
+</section>
+<section class="chapter chapter-gold" id="ritmo" data-scene="3" aria-labelledby="r-title">
+<div class="stage"><div class="plane scene-wash" aria-hidden="true"></div><div class="plane atmosphere" aria-hidden="true"></div><div class="plane halo" aria-hidden="true"></div><div class="plane ring" aria-hidden="true"></div><div class="scene-copy"><span class="scene-n">03 / Continuidad</span><h2 class="scene-title" id="r-title">Todo es <em>ritmo.</em></h2><p class="scene-desc">No hacemos que todo se mueva. Elegimos qué debe cambiar, cuándo y por qué. Lo demás permanece.</p><a class="scene-cta" href="#salida">Ver el resultado <span aria-hidden="true">↘</span></a></div><span class="corner-note" aria-hidden="true">[ 03 — 03 ]</span><div class="progress-line" aria-hidden="true"></div></div>
+</section>
+<section class="outro" id="salida"><p class="eyebrow" style="color:#9e6a34">Fin / Layered Scroll Engine</p><strong>Diseño que tiene algo que contar.</strong><p>Demo de movimientos por capas sincronizados con el desplazamiento. No altera el scroll nativo, funciona sin conexiones externas y respeta la preferencia de movimiento reducido.</p><a href="#principal">Volver al principio ↑</a></section>
+</main>
+<script>
+(() => {
+  'use strict';
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const chapters = Array.from(document.querySelectorAll('.chapter'));
+  let scheduled = false;
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const ease = (t) => t * t * (3 - 2 * t);
+  function frame() {
+    scheduled = false;
+    if (prefersReduced.matches) {
+      for (const chapter of chapters) {
+        const stage = chapter.querySelector('.stage');
+        for(const node of stage.querySelectorAll('.plane,.scene-copy,.progress-line')) node.removeAttribute('style');
+      }
+      return;
+    }
+    const vh = window.innerHeight;
+    for (const chapter of chapters) {
+      const rect = chapter.getBoundingClientRect();
+      if (rect.bottom < -vh || rect.top > vh * 2) continue;
+      const p = clamp(-rect.top / Math.max(1, rect.height - vh));
+      const stage = chapter.querySelector('.stage');
+      const wash = stage.querySelector('.scene-wash');
+      const air = stage.querySelector('.atmosphere');
+      const halo = stage.querySelector('.halo');
+      const ring = stage.querySelector('.ring');
+      const copy = stage.querySelector('.scene-copy');
+      const progress = stage.querySelector('.progress-line');
+      wash.style.transform = `scale(${1.03 + .11*p}) translate3d(${-1.2*p}%,${-1.3*p}%,0)`;
+      air.style.transform = `translate3d(${5*p}%,${-15*p}%,0) rotate(${4*p}deg)`;
+      halo.style.transform = `translate(-50%,-50%) translate3d(${12*p}vw,${-17*p}vh,0) scale(${.86 + .38*ease(p)})`;
+      ring.style.transform = `translate(-50%,-50%) rotate(${-13 + 32*p}deg) scale(${.94 + .21*p})`;
+      copy.style.transform = `translate3d(0,${-9*ease(p)}vh,0)`;
+      const exit = 1 - ease(clamp((p - .8)/.2));
+      copy.style.opacity = String(Math.max(.35,exit));
+      progress.style.transform = `scaleX(${p})`;
+    }
+  }
+  function requestFrame() { if(!scheduled){ scheduled=true; requestAnimationFrame(frame); } }
+  window.addEventListener('scroll',requestFrame,{passive:true});
+  window.addEventListener('resize',requestFrame,{passive:true});
+  if(typeof prefersReduced.addEventListener === 'function') prefersReduced.addEventListener('change',requestFrame);
+  requestFrame();
+})();
+</script>
+</body>
+</html>
